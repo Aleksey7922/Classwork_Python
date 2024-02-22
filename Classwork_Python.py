@@ -1734,6 +1734,7 @@ from random import randint  # генератор случайных значен
 
 from random import randint
 
+
 # def ran(a, b):
 #     return tuple(randint(a, b) for i in range(10))
 #
@@ -2885,3 +2886,187 @@ from random import randint
 # # lst.sort(key=func)
 # print(lst)
 # print(dict(lst))  # преобразовали список в словарь
+
+
+# ----------------------- Урок № 15 ----------------------------------------------------------------------------------
+
+# Задача. Отсортировать список
+
+# players = [  # создали список из словарей
+#     {'name': 'Антон', 'last_name': 'Бирюков', 'rating': 9},
+#     {'name': 'Алексей', 'last_name': 'Бодня', 'rating': 10},
+#     {'name': 'Федор', 'last_name': 'Сидоров', 'rating': 4},
+#     {'name': 'Михаил', 'last_name': 'Семенов', 'rating': 6},
+# ]
+#
+# res1 = sorted(players, key=lambda item: item['last_name'])  # sorted()-отсортированные элементы сохраняет в нов список
+# print(res1)  # вывод, сортировка по ключу, (по фамилии)
+# res2 = sorted(players, key=lambda item: item['rating'])  # отсортировали по рейтингу (по ключу 'rating')
+# print(res2)
+# res3 = sorted(players, reverse=True, key=lambda item: item['rating'])  # сортировка рейтинга от большего к меньшему
+# print(res3)
+
+
+# a = [lambda x, y: x + y, lambda x, y: x - y, lambda x, y: x * y]  # сохранили в переменную список лямбда-выражений
+# b = a[0](5, 3)  # по индексу выбираем действие над введенными параметрами
+# print(b)
+
+
+# d = {  # создали словарь
+#     1: lambda: print("Понедельник"),
+#     2: lambda: print("Вторник"),
+#     3: lambda: print("Среда"),
+#     4: lambda: print("Четверг"),
+# }
+#
+# d[3]()  # обращение к элементу по индексу (ключу)
+
+# print((lambda a, b: a if a > b else b)(5, 13))  # условие if else в лямбда-выражении (какое число больше)
+
+
+# print((lambda a, b, c: a if (a < b) and ((b < c) or (b > c)) else b if b < c else c)(12, 15, 6))
+
+
+# print((lambda a, b, c: a if (a < b) and (a < c) else b if (b < c) and (b < a) else c if (c < a) and (
+#             c < b) else "Ну тут уже всё:)")(22, 35, 16))
+# print((lambda a, b, c: a if (a < b) and (a < c) else b if (b < c) and (b < a) else c)(12, 36, 15))
+
+#
+# print((lambda a, b, c: a if min(a, b, c) == a else b if min(a, b, c) == b else c if min(a, b,
+
+#  c) == c else "Несколько равных")(
+#     11, 2, 111))
+#
+# print((lambda *args: min(args))(12, 5, 6))  # нахождение минимального числа
+# print((lambda *args: sorted(args)[0])(2, 5, 6))  # нахождение минимального числа
+# print((lambda *args: sorted(args)[-1])(2, 5, 6))  # нахождение максимального числа
+
+# Циклы, записанные в одну строку --------------------------
+
+# map(func, iterable), filter(func, iterable)  # 1 параметр-функция, 2 параметр-итерируемый объект
+
+# Функция map() - отрабатывает как цикл, который проходит по каждому элементу итерируемого объекта------------
+
+# 1 вариант
+# def mult(t):  # создали функцию
+#     return t * 2  # то что функция возвращает (действие)
+#
+#
+# lst = [2, 8, 12, -5, -10]  # создали список (итерируемый объект)
+#
+# lt = list(map(mult, lst)) # создали переменную,в ней функция и список(итерируемый объект¿)
+# print(lt)
+#
+# # 2 вариант (лямбда-выражение)
+# lt1 = list(map(lambda t: t * 2, lst))
+# print(lt1)
+#
+# # 3 вариант
+# print(list(map(lambda t: t * 2, [2, 8, 12, -5, -10])))
+
+# lst = ['1', '2', '3', '4', '5'] # создали список чисел в виде строковых значений
+# print(lst)
+# print(list(map(lambda x: int(x), lst))) # функцией map() прошли по списку, как циклом,  преобразовали в int
+
+# print([int(i) for i in lst]) # преобразование типа данных
+# print(list(map(int, lst)))   # преобразование типа данных
+
+# st = ['a', 'b', 'c', 'd', 'e']
+# num = [1, 2, 3, 4, 5]
+# print(list(map(lambda x, y: {x: y}, st, num)))
+
+# st = [9, 2, 7, 6, 5]
+# num = [1, 2, 3, 4, 5]
+# print(list(map(lambda x, y: x + y, st, num)))
+
+# t = ('abcd', 'abc', 'cdefg', 'def', 'gth', '', False)  # создали кортеж
+#
+# t2 = list(filter(lambda s: len(s) == 3, t))
+# # t2 = list(filter(lambda s: s, t))
+# print(t2)
+
+# Задача. Дан список студентов, нужно отфильтровать тех, у кого больше 75 баллов
+# b = [66, 90, 68, 59, 76, 60, 88, 74, 81, 65] # список
+# print(list(filter(lambda s: s > 75, b)))
+
+# Задача. Сгенерировать список из 10 элементов случайным образом. Из полученного списка выбрать только те числа,
+# которые находятся в диапазоне от 10 до 20 (включительно)
+# from random import randint
+#
+# arr = [randint(1, 40) for i in range(10)]
+# print(arr)
+# # print(list(filter(lambda a: (a >= 10) and a <= 20, arr)))
+# print(list(filter(lambda a: 10 <= a <= 20, arr)))
+
+# Совмещение map() и filter()-----------------
+# Вывести на экран квадраты нечетных чисел от 1 до 10
+# print(list(map(lambda x: x ** 2, filter(lambda x: x % 2, range(1, 10)))))
+# print([x ** 2 for x in range(1, 10) if x % 2])
+
+
+# Декораторы - это функции принимающие другую функцию в качестве аргумента, добавляющие функциональность и возвращающие
+# функцию с измененным поведением --------------------------------------------------
+#
+# def hello():
+#     return 'Hello, I am func "hello"'  # 3
+#
+#
+# def super_func(func):  # (def hello(): return 'Hello, I am func "hello"')
+#     print('Hello, I am func "super_func"')  # 2
+#     print(func())  # 4
+#
+#
+# super_func(hello)  # 1
+
+#
+# def hello():
+#     return 'Hello, I am func "hello"'
+#
+#
+# test = hello
+# print(id(test))
+# print(id(hello))
+# print(test())
+
+# ---------------------------------------------------------------
+# def my_decorator(func):  # декорирующая функция
+#     def inner():
+#         print('Code before')
+#         func()
+#         print('Code after')
+#
+#     return inner
+#
+#
+# def func_test():   # декорируемая функция
+#     print('Hello, I am func "func_test"')
+#
+#
+# test = my_decorator(func_test)
+# test()
+# ----------------------------------------------------------
+
+# def my_decorator(func):  # декорирующая функция
+#     def inner():
+#         print('*' * 40)
+#         func()
+#         print('-' * 40)
+#
+#     return inner
+#
+#
+# @my_decorator  # декоратор
+# def func_test():  # декорируемая функция
+#     print('Hello, I am func "func_test"')
+#
+#
+# @my_decorator
+# def hello():
+#     print('Hello, I am func "hello"')
+#
+#
+# func_test()
+# hello()
+#
+# m = "Hello"
+# print(m[::-1])

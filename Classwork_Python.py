@@ -1026,7 +1026,7 @@
 # print(c)
 
 
-# -----------------------Урок № 6----------------------------------------------------------------------------------
+# -----------------------Урок № 16----------------------------------------------------------------------------------
 
 # a = [1, 2, 3]
 # b = [11, 22, 33]
@@ -3585,7 +3585,6 @@ from random import randint
 
 import re
 
-
 # s = "Я ищу совпадение в 2024 году. И я их [найду] в 2 счё-та. 198673 Hello"
 # reg = "[204]" # поиск указанного в скобках символа
 # reg = "[21][0-9][0-9][0-9]" # [0-9] - совпадение от 0 до 9
@@ -3805,12 +3804,364 @@ import re
 # print(sum_list([1, 3, 5, 7, 9]))  # 25 # вызываем функцию
 
 # Задача. Написать функцию, переводящую число в любую систему счисления
-def to_str(n, base):  # n-число; base-основание системы счисления
-    convert = "0123456789ABCDEF"
-    if n < base:
-        return convert[n]
-    else:
-        return to_str(n // base, base) + convert[n % base]
+# def to_str(n, base):  # n-число; base-основание системы счисления
+#     convert = "0123456789ABCDEF"
+#     if n < base:  # базовый случай, условие выхода из рекурсии
+#         return convert[n]
+#     else:
+#         return to_str(n // base, base) + convert[n % base]
+#
+#
+# print(to_str(254, 8))  # to_str(254, 16) => FE
 
 
-print(to_str(254, 8))  # to_str(254, 16) => FE
+# ----------------------- Урок № 20 ----------------------------------------------------------------------------------
+
+# Задача. Узнать кол-во всех элементов  в списке
+# names = ["Adam", ["Bob", ["Chet", "Cat", ["1", ["2", ["3"]]]], "Bard", "Bert"], "Alex", ["Bea", "Bill"], "Ann"]  #
+# создали список с вложенными списками
+
+
+# print(names[0])
+# print(isinstance(names[0], list))  # isinstance() - функция проверяет явл-ся ли элемент указанным типом данных
+# print(names[1])
+# print(isinstance(names[1], list))
+# # print(names[1][1])
+# # print(isinstance(names[1][1], list))
+
+# def count_items(item_list):  # создали функцию для подсчета элементов списка
+#     count = 0  # переменная для сохранения результата
+#     for item in item_list: # проходим циклом по списку
+#         if isinstance(item, list): # с помощью isinstance() проверяем, явл-ся ли элементы типом данных list ?
+#             count += count_items(item)  # count += 2, еще раз(по рекурсии) и суммируем в count
+#         else:
+#             count += 1  # если не явл-ся типом данных list, увеличиваем count на 1
+#     return count # в конце возвращаем кол-во элементов
+#
+#
+# print(count_items(names))  # вызываем функцию, и передаем в нее список
+
+# Задача. Удалить из строки заданные символы
+# def remove(text):  # ""
+#     if not text:  # text = ""
+#         return ""
+#     if text[0] == "\n" or text[0] == " ":
+#         return remove(text[1:])  # ""
+#     else:
+#         return text[0] + remove(text[1:])  # "HelloWorld" + ""
+#
+#
+# print(remove("  Hello\nWorld "))
+
+
+# Файлы--------------------------------------------------------------------------------------------------
+
+# f = open("test.txt", "r")  # open()- открыть файл,("имя файла", "режим открытия") "r"- чтение
+# print(f)
+# print(*f)  # * - распаковка файлового объекта
+# # print(f.mode) # - .mode - свойство, режим открытия файла
+# # print(f.name) # .name -свойство, имя файла
+# # print(f.encoding) # .name - свойство, кодировка файла
+# f.close()  # .close() - закрыли файл
+# print(f.closed)  # .closed - свойство, проверяем закрыт ли файл(True, false)
+
+#
+# f = open("test.txt", "r")  # относительный путь к файлу
+# # f = open(r"D:\Python 317\Classwork_Python\test.txt", "r")  # абсолютный путь к файлу
+# print(f.read(3))  # (3) - возвращает указанное кол-во символов
+# print(f.read())  # возвращает весь документ
+# f.close()
+
+
+# f = open("test2.txt", "r")
+# print(f.readline())  # возвращает одну строку
+# print(f.readline(8))
+# print(f.readline())
+# print(f.readline())
+# f.close()
+
+#
+# f = open("test2.txt", "r")
+# print(f.readlines(16))
+# print(f.readlines())  # возвращает список строк
+# f.close()
+
+# Задача. Определите кол-во строк в файле
+# 1 вариант
+# f = open("test2.txt", "r")
+# count = 0
+# for line in f:  # проходим циклом по файлу
+#     print(line, end="") # выводим файл построчно
+#     count += 1 # считаем строки
+# f.close()
+# print(count)
+
+# 2 вариант
+# f = open("test2.txt", "r")
+# print(len(f.readlines())) # - длина списка строк
+# f.close()
+
+# f = open("xyz.txt", "w")  # "w"- запись(если файл существует, он будет очищен, если нет - создан)
+# f.write("Hello\nWorld!\n")  # .write() - метод, делает запись в файл
+# f.close()
+
+
+# f = open("xyz.txt", "a")  #  "a"- запись(если файл существует, то данные добавятся в конец файла)
+# f.write("New text.\n")
+# f.close()
+
+#
+# f = open("xyz.txt", "a")  # "а"- если файла с таким именем не существует, то он будет создан
+# lines = ['\nThis is line 1', '\nThis is line 2']  # /n -запись с новой строки
+# f.writelines(lines)
+# f.close()
+
+# f = open("xyz.txt", "w")
+# lst = [str(i) + " " for i in range(1, 20)]
+# print(lst)
+# # for index in lst:
+# #     f.write(index+"\t")
+# f.writelines(lst)
+# f.close()
+
+# f = open("test3.txt", "w")  # создали файл
+# f.write("Замена строки в текстовом файле;\nизменить строку в списке;\nзаписать список в файл\n")
+# f.close()  # закрыли файл(сохранили)
+#
+# f = open('test3.txt', 'r')  # открыли файл
+# read_file = f.readlines()  # считываем файл
+# print(read_file)  # вывели файл
+# read_file[1] = "Hello world!\n"  # изменили данные через индекс
+# print(read_file)
+# f.close()  # закрыли файл(сохранили)
+# #
+# f = open("test3.txt", "w")  # открыли файл заново
+# f.writelines(read_file)  # записали в файл измененные данные
+# f.close()  # закрыли файл(сохранили)
+
+
+# f = open("test3.txt", "w")
+# f.write("Замена строки в текстовом файле;\nизменить строку в списке;\nзаписать список в файл\n")
+# f.close()
+
+# f = open("test3.txt", 'r')
+# read_file = f.readlines()
+# pos = int(input("Введите индекс строки для удаления: "))
+# if 0 <= pos < len(read_file):
+#     del_pos = read_file.pop(pos)
+# else:
+#     print("Индекс введен неверно")
+# f.close()
+#
+# f = open("test3.txt", 'w')
+# f.writelines(read_file)
+# f.close()
+
+
+# f = open("test.txt", "r")
+# print(f.read(3))
+# print(f.tell())  # возвращает текущую позицию условного курсора в файле
+# print(f.seek(1))  # перемещает условный курсор в заданную позицию
+# print(f.read())
+# print(f.tell())
+# f.close()
+
+# f = open("test.txt", "r+")  # "r+" - юрежим для чтения и записи
+# print(f.write("I am learning Python"))
+# print(f.seek(3))
+# print(f.write("-new string-"))
+# print(f.tell())
+# f.close()
+
+# f = open("test2.txt", "a+")
+# # print(f.write("1111 I am learning Python 1111"))
+# print(f.read())
+# f.close()
+
+# with open("test2.txt", 'w+') as f:  # для работы с контекстным менеджером
+#     print(f.write('01234\n56789'))
+# print(f.closed)
+
+
+# with open("test2.txt", 'r') as f:
+#     for line in f:
+#         print(line[:3])
+
+
+# ----------------------- Урок № 21 ----------------------------------------------------------------------------------
+
+# def negative_numbers(n):  # n = []
+#     if not n:
+#         return 0
+#     count = 0  # 0
+#     if n[0] < 0:
+#         count += 1
+#     return negative_numbers(n[1:]) + count  # 1 + 0 + 0 + 1 + 1 + 0 + 0
+#
+#
+# lst = [-2, 3, 8, -11, -4, 6]
+# print(negative_numbers(lst))
+
+# file_name = "res.txt"  # в отдельную переменную вынесли имя файла
+# lst = [4.5, 2.8, 3.9, 1.0, 0.3, 4.33, 7.777]  # создали список вещественных чисел
+#
+#
+# #
+# def get_line(lt):
+#     lt = map(str, lt)  # ['4.5', '2.8', '3.9', '1.0', '0.3', '4.33', '7.777'] #привели float к str
+#     return ' '.join(lt)  # "4.5 2.8 3.9 1.0 0.3 4.33 7.777" # .join()- объединяет элементы списка в строку
+#
+#
+#
+# #
+# with open(file_name, 'w') as f:
+#     f.write(get_line(lst))
+#     # f.write(str(lst))  # "4.5 2.8 3.9 1.0 0.3 4.33 7.777"
+#
+#
+# with open(file_name, 'r') as f:  # открыли файл для чтения
+#     st = f.read()  # считали данные в переменную st
+#
+# print(st)
+# print(type(st))
+#
+# nums = list(map(float, st.split()))
+# print(nums)
+# print(type(nums[0]))
+
+# a = 5
+
+
+# if a == 5:
+#     b = 10
+
+# for i in range(12):
+#     b = 10
+
+# def func():
+#     b = 10
+#
+# )
+# func()
+# print(b)
+
+# Задача. Написать функцию, которая выводит слово из файла, имеющее максимальную длину
+# (или список слов, если таковых несколько)
+# def longest_worlds(file):  # в принимаемый аргумент попадает имя файла "test.txt"
+#     with open(file, "r", encoding="utf-8") as text:  # открыли файл через контекстный менеджер, изменили кодировку
+#         w = text.read().split()  # считали файл в переменную w, и сделали список из строки .split()
+#         print(w)
+#         # max_length = max(w, key=len)  # с помощью функции max() определяем самое длинное слово из списка
+#         max_length = len(max(w, key=len))  # кол-во символов в максимальном слове
+#         res = [i for i in w if len(i) == max_length]  # проходим по списку, возвращает длинные слова из списка
+#         return res
+#
+#
+# print(longest_worlds("test.txt"))  # вызвали функцию
+
+# def longest_worlds(file):
+#     with open(file, 'r') as text:  # encoding="utf-8"
+#         w = text.read().split()
+#         print(w)
+#         max_length = len(max(w, key=len))
+#         print(max_length)
+#         res = [i for i in w if len(i) == max_length]
+#         if len(res) == 1:
+#             return res[0]
+#         return res
+#
+#
+# print(longest_worlds('test.txt'))
+
+
+# text = "Строка №1\nСтрока №2\nСтрока №3\nСтрока №4\nСтрока №5\nСтрока №6\nСтрока №7\nСтрока №8\nСтрока №9\n
+# Строка №10\n"
+
+
+# with open('one.txt', 'w') as f:
+#     f.write(text)
+
+# Открыли два файла, считываем строку из одного файла изменяем, и перезаписываем ее в новый файл
+# with open('one.txt', 'r') as fr, open('two.txt', 'w') as fw:
+#     for line in fr:  # проходим циклом по первому файлу с информацией
+#         line = line.replace("Строка", "Линия -")  # заменяем слово "Строка" на "Линия-" методом .replace()
+#         fw.write(line)  # перезаписываем информацию во второй новый файл
+
+# Модуль OS, OS.PATH ----------------------------------------------------------
+import os
+
+# import os.path
+# Модуль os работает с операционной системой - создать папку, переименовать файл, перенести файл,удалить файл,папку...
+# Модуль os.path - работает с путями
+#
+# print(os.getcwd())  # .getcwd()- возвращает текущую директорию (путь к файлу) D:\Python 317\Classwork_Python
+# print(os.listdir())  # .listdir()- список директорий и файлов (возвращает все что есть в текущей папке)
+# print(os.listdir(".."))  # .listdir("..") - возвращает папки уровнем выше
+
+# os.mkdir('folder1')  # создает папку
+# os.makedirs("nested1/nested2/nested3")  # создает конечную директорию вмести с промежуточными
+
+# os.rmdir("folder1")  # удаление пустой папки
+# os.rmdir("nested1/nested2/nested3")
+
+# os.remove("xyz.txt")  # удаление файла
+
+# os.rename("xyz.txt", "new.txt")  # переименование файла и папки
+# os.rename("folder", "new")
+
+# os.rename("two.txt", "nested1/two1.txt")
+# os.renames("test.txt", "nested1/nested3/two.txt")  # переименование файла и папки, перемещает документы,
+# создавая промежуточные директории
+
+
+# for root, dirs, files in os.walk("nested1", topdown=False):
+#     print("Root:", root)
+#     print("\tSubdirs:", dirs)
+#     print("\t\tFiles:", files)
+
+
+# def remove_empty_dirs(root_tree):
+#     print(f"Удаление пустых директорий в ветви {root_tree}")
+#     print('-' * 50)
+#     for root, dirs, files in os.walk(root_tree):
+#         if not os.listdir(root):
+#             os.rmdir(root)
+#             print(f"Директория {root} удалена.")
+#     print('-' * 50)
+#
+#
+# remove_empty_dirs("nested1")
+
+# print(os.path.split(r"D:\Python317\317\nested1\nested2\nested4\text.txt"))  # [1]
+#
+# print(os.path.join('nested4', r'D:\Python317', '317', 'nested1', 'nested2', 'text.txt'))
+
+          
+#
+# dirs = [r'Work\F1', r'Work\F2\F21']  # создали список
+# for d in dirs:  # прошли циклом
+#     os.makedirs(d)
+
+# files = {  # преобразовали в словарь, создали папаки
+#     'Work': ['w.txt'],
+#     r'Work\F1': ['f11.txt', 'f12.txt', 'f13.txt'],
+#     r'Work\F2\F21': ['f211.txt', 'f212.txt']
+# }
+#
+# for dir1, files in files.items():
+#     for file in files:
+#         file_path = os.path.join(dir1, file)
+#         open(file_path, 'w').close()
+
+# file_with_text = [r'Work\w.txt', r'Work\F1\f12.txt', r'Work\F2\F21\f211.txt', r'Work\F2\F21\f212.txt']
+#
+# for file in file_with_text:
+#     with open(file, 'w') as f:
+#         f.write(f"Текст в файле {file}")
+#
+# Work\w.txt
+# Work\F1\f11.txt
+# Work\F1\f12.txt
+# Work\F1\f13.txt
+# Work\F2\F21\f211.txt
+# Work\F2\F21\f212.txt
